@@ -1,0 +1,102 @@
+[
+  {
+    "model": "bookstore.publisher",
+    "pk": 1,
+    "fields": { "name": "Penguin Books" }
+  },
+  {
+    "model": "bookstore.publisher",
+    "pk": 2,
+    "fields": { "name": "Oxford University Press" }
+  },
+  {
+    "model": "bookstore.publisher",
+    "pk": 3,
+    "fields": { "name": "Vintage Classics" }
+  },
+  {
+    "model": "bookstore.author",
+    "pk": 1,
+    "fields": { "name": "Jane Austen" }
+  },
+  {
+    "model": "bookstore.author",
+    "pk": 2,
+    "fields": { "name": "Leo Tolstoy" }
+  },
+  {
+    "model": "bookstore.author",
+    "pk": 3,
+    "fields": { "name": "Fyodor Dostoevsky" }
+  },
+  {
+    "model": "bookstore.book",
+    "pk": 1,
+    "fields": { "title": "Emma", "author": 1 }
+  },
+  {
+    "model": "bookstore.book",
+    "pk": 2,
+    "fields": { "title": "Persuasion", "author": 1 }
+  },
+  {
+    "model": "bookstore.book",
+    "pk": 3,
+    "fields": { "title": "Pride and Prejudice", "author": 1 }
+  },
+  {
+    "model": "bookstore.book",
+    "pk": 4,
+    "fields": { "title": "War and Peace", "author": 2 }
+  },
+  {
+    "model": "bookstore.book",
+    "pk": 5,
+    "fields": { "title": "Anna Karenina", "author": 2 }
+  },
+  {
+    "model": "bookstore.book",
+    "pk": 6,
+    "fields": { "title": "The Death of Ivan Ilyich", "author": 2 }
+  },
+  {
+    "model": "bookstore.book",
+    "pk": 7,
+    "fields": { "title": "Crime and Punishment", "author": 3 }
+  },
+  {
+    "model": "bookstore.book",
+    "pk": 8,
+    "fields": { "title": "The Brothers Karamazov", "author": 3 }
+  },
+  {
+    "model": "bookstore.book",
+    "pk": 9,
+    "fields": { "title": "The Idiot", "author": 3 }
+  },
+  {
+    "model": "bookstore.order",
+    "pk": 1,
+    "fields": { "reference": "ORD-001", "author": 1 }
+  },
+  {
+    "model": "bookstore.order",
+    "pk": 2,
+    "fields": { "reference": "ORD-002", "author": 1 }
+  },
+  {
+    "model": "bookstore.order",
+    "pk": 3,
+    "fields": { "reference": "ORD-003", "author": 2 }
+  },
+  {
+    "model": "bookstore.order",
+    "pk": 4,
+    "fields": { "reference": "ORD-004", "author": 2 }
+  },
+  {
+    "model": "bookstore.order",
+    "pk": 5,
+    "fields": { "reference": "ORD-005", "author": 3 }
+  }
+]

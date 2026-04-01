@@ -48,7 +48,7 @@ class DeletePreviewMixin(models.Model):
         )
         return get_delete_summary([self], using=db, max_items=max_items)
 
-    def delete(  # type: ignore[override]
+    def delete(
         self,
         using: Any = None,
         keep_parents: bool = False,
@@ -73,4 +73,4 @@ class DeletePreviewMixin(models.Model):
             raise ValueError(
                 "Delete blocked. Run preview_delete() first and confirm the operation."
             )
-        return super().delete(using=using, keep_parents=keep_parents)  # type: ignore[return-value]
+        return super().delete(using=using, keep_parents=keep_parents)

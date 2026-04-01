@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, TypedDict, cast
 
 from django.db import models
 from django.db.models.deletion import Collector
@@ -9,8 +9,8 @@ from django.db.models.query import QuerySet
 from django_delete_preview.settings import get_max_items
 
 
-class DeleteSummary(dict):  # type: ignore[type-arg]
-    """Typed dict-like container for delete preview results."""
+class DeleteSummary(TypedDict):
+    """Typed dict for delete preview results."""
 
     database: str
     total_objects: int
@@ -41,7 +41,10 @@ def get_delete_summary(
     collector = Collector(using=using)
 
     if isinstance(objs, QuerySet):
-        collector.collect(objs)
+        # Django's Collector.collect() accepts QuerySets at runtime, but the
+        # type stubs model it as _IndexableCollection which requires __contains__.
+        # Cast to satisfy mypy without loading the queryset into memory.
+        collector.collect(cast("list[Any]", objs))
     else:
         collector.collect(objs)
 

@@ -53,7 +53,7 @@ jobs:
           fi
 
       - name: Push commit and tag
-        run: git push --follow-tags
+        run: git push && git push --tags
 
       - name: Create GitHub Release
         env:

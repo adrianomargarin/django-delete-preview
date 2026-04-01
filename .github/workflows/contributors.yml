@@ -20,13 +20,13 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           CONTRIBUTORS=$(gh api repos/${{ github.repository }}/contributors \
-            --jq '[.[] | select(.type == "User") | .login] | @json')
+            --jq '[.[] | select(.type == "User") | .login]')
 
           NAMES=$(echo "$CONTRIBUTORS" | jq -r '.[]' | while read login; do
             gh api users/$login --jq '.name // .login'
           done)
 
-          AUTHORS=$(echo "$NAMES" | jq -Rs 'split("\n") | map(select(. != "")) | map({name: .}) | @json' | jq -c '.')
+          AUTHORS=$(echo "$NAMES" | jq -Rs '[split("\n") | .[] | select(. != "") | {name: .}]')
 
           python3 - <<EOF
           import re, json

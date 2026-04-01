@@ -1,0 +1,57 @@
+name: Update Contributors
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-contributors:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch contributors and update pyproject.toml
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          CONTRIBUTORS=$(gh api repos/${{ github.repository }}/contributors \
+            --jq '[.[] | select(.type == "User") | .login] | @json')
+
+          NAMES=$(echo "$CONTRIBUTORS" | jq -r '.[]' | while read login; do
+            gh api users/$login --jq '.name // .login'
+          done)
+
+          AUTHORS=$(echo "$NAMES" | jq -Rs 'split("\n") | map(select(. != "")) | map({name: .}) | @json' | jq -c '.')
+
+          python3 - <<EOF
+          import re, json
+
+          with open("pyproject.toml", "r") as f:
+              content = f.read()
+
+          authors = json.loads('$AUTHORS')
+          value = ", ".join(f'{{{{ name = "{a["name"]}" }}}}' for a in authors)
+          new_line = f"authors = [{value}]"
+
+          content = re.sub(r'^authors = \[.*?\]', new_line, content, flags=re.MULTILINE)
+
+          with open("pyproject.toml", "w") as f:
+              f.write(content)
+
+          print(f"Updated authors: {value}")
+          EOF
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --quiet pyproject.toml || (
+            git add pyproject.toml &&
+            git commit -m "chore: update contributors in pyproject.toml"
+          )
+          git push

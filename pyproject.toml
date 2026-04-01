@@ -8,7 +8,7 @@ version = "0.0.2"
 description = "Preview cascade deletes before execution and enforce safe deletion with explicit confirmation."
 readme = "README.md"
 license = { text = "MIT" }
-authors = [{{ name = "Adriano Margarin" }}]
+authors = [{ name = "Adriano Margarin" }]
 keywords = ["django", "delete", "preview", "cascade", "safe-delete"]
 classifiers = [
     "Development Status :: 4 - Beta",

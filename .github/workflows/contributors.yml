@@ -35,7 +35,7 @@ jobs:
               content = f.read()
 
           authors = json.loads('$AUTHORS')
-          value = ", ".join(f'{{{{ name = "{a["name"]}" }}}}' for a in authors)
+          value = ", ".join(f'{{ name = "{a["name"]}" }}' for a in authors)
           new_line = f"authors = [{value}]"
 
           content = re.sub(r'^authors = \[.*?\]', new_line, content, flags=re.MULTILINE)

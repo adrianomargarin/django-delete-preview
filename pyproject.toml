@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "django-delete-preview"
-version = "0.0.1"
+version = "0.0.2"
 description = "Preview cascade deletes before execution and enforce safe deletion with explicit confirmation."
 readme = "README.md"
 license = { text = "MIT" }

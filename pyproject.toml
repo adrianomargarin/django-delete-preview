@@ -36,6 +36,7 @@ dev = [
     "django-stubs>=5.0",
     "pre-commit>=3.7",
     "build>=1.2",
+    "commitizen>=3.27",
 ]
 
 [project.urls]
@@ -59,6 +60,16 @@ plugins = ["mypy_django_plugin.main"]
 
 [tool.django-stubs]
 django_settings_module = "tests.settings"
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version_provider = "pep621"
+version_files = [
+    "src/django_delete_preview/__init__.py:__version__",
+]
+tag_format = "v$version"
+update_changelog_on_bump = true
+major_version_zero = true
 
 [tool.ruff]
 src = ["src"]

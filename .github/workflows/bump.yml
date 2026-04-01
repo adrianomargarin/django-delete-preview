@@ -60,7 +60,4 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG=$(git describe --tags --abbrev=0)
-          VERSION=${TAG#v}
-          # Extract notes for this version from CHANGELOG.md
-          awk "/^## $VERSION /{found=1; next} found && /^## /{exit} found{print}" CHANGELOG.md > notes.md
-          gh release create "$TAG" --title "$TAG" --notes-file notes.md
+          gh release create "$TAG" --title "$TAG" --generate-notes

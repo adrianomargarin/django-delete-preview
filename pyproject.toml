@@ -1,0 +1,81 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "django-delete-preview"
+version = "0.1.0"
+description = "Preview cascade deletes before execution and enforce safe deletion with explicit confirmation."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "django-delete-preview contributors" }]
+keywords = ["django", "delete", "preview", "cascade", "safe-delete"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.0",
+    "Framework :: Django :: 5.1",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.10"
+dependencies = ["django>=4.2"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-django>=4.7",
+    "ruff>=0.4",
+    "mypy>=1.10",
+    "django-stubs>=5.0",
+    "pre-commit>=3.7",
+    "build>=1.2",
+    "commitizen>=3.27",
+]
+
+[project.urls]
+Homepage = "https://github.com/adrianomargarin/django-delete-preview"
+Repository = "https://github.com/adrianomargarin/django-delete-preview"
+Issues = "https://github.com/adrianomargarin/django-delete-preview/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/django_delete_preview"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tests.settings"
+pythonpath = ["src", ".", "example"]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+mypy_path = "src"
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "tests.settings"
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version_provider = "pep621"
+version_files = [
+    "src/django_delete_preview/__init__.py:__version__",
+]
+tag_format = "v$version"
+update_changelog_on_bump = true
+major_version_zero = true
+
+[tool.ruff]
+src = ["src"]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "C4", "PT", "RUF"]
+ignore = ["B008"]

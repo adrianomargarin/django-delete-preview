@@ -5,7 +5,7 @@ Preview cascade deletes before execution and enforce safe deletion
 with explicit confirmation.
 """
 
-__version__ = "0.0.0"
+__version__ = "0.0.1"
 default_app_config = "django_delete_preview.apps.DeletePreviewConfig"
 
 __all__ = [
